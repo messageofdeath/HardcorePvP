@@ -53,17 +53,17 @@ public class HardcorePvP extends JavaPlugin implements Listener {
 	public void onKill(PlayerDeathEvent event) {
 		Player died = event.getEntity();
 		Player killer = died.getKiller();
-		int kills = User.getKills(killer.getName()) + 1;
+		int kills = Backend.getKills(killer.getName()) + 1;
 		if(kills >= 2) {
-			User.setKills(killer.getName(), 0);
-			int level = User.getLevel(killer.getName()) + 1;
+			Backend.setKills(killer.getName(), 0);
+			int level = Backend.getLevel(killer.getName()) + 1;
 			if(level < Backend.getMaxLevel()) {
-				User.setLevel(killer.getName(), level);
+				Backend.setLevel(killer.getName(), level);
 				killer.sendMessage("You ranked up to level " + level);
 			}
-		}else{User.setKills(killer.getName(), kills);}
+		}else{Backend.setKills(killer.getName(), kills);}
 		event.setDeathMessage(ChatColor.BLACK + "[" + ChatColor.DARK_BLUE + "HardCore" + ChatColor.DARK_RED + "P" 
 				+ ChatColor.WHITE + "v" + ChatColor.DARK_RED + "P" + ChatColor.BLACK + "] " + ChatColor.DARK_GREEN + died.getName() 
-				+ "(" + User.getLevel(died.getName()) + ") was killed by " + killer.getName() + "(" + User.getLevel(killer.getName()) + ")!");
+				+ "(" + Backend.getLevel(died.getName()) + ") was killed by " + killer.getName() + "(" + Backend.getLevel(killer.getName()) + ")!");
 	}
 }
